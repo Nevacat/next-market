@@ -1,14 +1,15 @@
 "use client";
 import { cn } from "@/lib/util";
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import NavItem from "./NavItem";
 import Link from "next/link";
 
 const Navbar = () => {
   const [navbarOpen, setNavbarOpen] = useState(false);
-  const handleMenu = () => {
+
+  const handleMenu = useCallback(() => {
     setNavbarOpen(!navbarOpen);
-  };
+  },[navbarOpen]);
 
   return (
     <nav className={cn("relative z-10 w-full bg-[#535C91] text-white")}>
@@ -20,8 +21,11 @@ const Navbar = () => {
           {!navbarOpen ? <div onClick={handleMenu}>+</div> : <div onClick={handleMenu}>-</div>}
           </div>
         <div className={cn("hidden sm:block")}>
-          <NavItem />
+          <NavItem/>
         </div>
+      </div>
+      <div className="block sm:hidden">
+        {navbarOpen && <NavItem mobile={true}/> }
       </div>
     </nav>
   );
