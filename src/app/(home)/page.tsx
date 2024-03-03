@@ -1,8 +1,11 @@
+import Container from '@/components/Container'
 import React from 'react'
 
 const page = () => {
   return (
-    <div>page</div>
+    <Container>
+      <div>메인</div>
+    </Container>
   )
 }
 
