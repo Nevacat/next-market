@@ -8,14 +8,54 @@ datasource db {
 }
 
 model User {
-  id String @id @default(uuid())
-  username String?
-  hashedPassword String?
+  id String @id @default(cuid())
+  username String
+  password String
   email String? @unique
-  emailVerified DateTime?
   image String?
-  userType String?
+  role String @default("user")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  favoriteIds String[]
+  products Product[]
+  favorites String[]
+  receiverMessages Message[] @relation("receiver")
+  senderMessages Message[] @relation("sender")
+  conversations conversation[] @relation("conversations")
+}
+
+model Product {
+  id String @id @default(cuid())
+  title String
+  description String?
+  image String
+  category String
+  price Float
+  userId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model conversation {
+  id String @id @default(cuid())
+  senderId String
+  receiverId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  messages Message[]
+  user User[] @relation("conversations")
+}
+
+model Message {
+  id String @id @default(cuid())
+  text String?
+  image String?
+  senderId String
+  receiverId String
+  conversationId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  conversation conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  receiver User @relation("receiver", fields: [receiverId], references: [id])
+  sender User @relation("sender", fields: [senderId], references: [id])
 }
