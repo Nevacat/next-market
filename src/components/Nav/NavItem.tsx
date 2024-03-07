@@ -29,7 +29,6 @@ interface INavItemProps {
 
 const NavItem = ({ mobile }: INavItemProps) => {
   const { data: session } = useSession();
-  console.log("session", session);
   const pathname = usePathname();
 
   return (
