@@ -31,6 +31,9 @@ export const authOptions : NextAuthOptions = {
     maxAge: 30 * 24 * 60 * 60,
   },
   secret: process.env.JWT_SECRET,
+  pages:{
+    signIn: "/auth/login",
+  },
   callbacks:{
     async jwt({token, user}){
       return {...token, ...user}
