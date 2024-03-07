@@ -59,7 +59,7 @@ const NavItem = ({ mobile }: INavItemProps) => {
         <li
           className={cn(
             "py-1 text-center cursor-pointer",
-            pathname === "/signin" && "border-b-4"
+            pathname === "/auth/login" && "border-b-4"
           )}
         >
           <button onClick={() => signIn()}>signIn</button>
