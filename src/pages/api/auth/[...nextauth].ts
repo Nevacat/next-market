@@ -1,7 +1,11 @@
 import NextAuth, { NextAuthOptions } from "next-auth"
-import GithubProvider from "next-auth/providers/github"
+import { PrismaAdapter } from "@auth/prisma-adapter"
 import CredentialsProvider from "next-auth/providers/credentials";
+import prisma from '@/helper/prismadb'
+import { Adapter } from "next-auth/adapters";
+
 export const authOptions : NextAuthOptions = {
+  adapter: PrismaAdapter(prisma) as Adapter,
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -10,19 +14,20 @@ export const authOptions : NextAuthOptions = {
         password: { label: "Password", type: "password" }
       },
       async authorize(credentials, req) {
-        if(!credentials?.email || credentials?.password){
-          throw new Error("이메일과 비밀번호를 입력해주세요.")
-        }
-        const user = { id: "1", name: "J Smith", email: "jsmith@example.com" }
-        if (user) {
-          return Promise.resolve(user)
+        // if(!credentials?.email || credentials?.password){
+        //   throw new Error("이메일과 비밀번호를 입력해주세요.")
+        // }
+        const user = { id: "1", name: "J Smith", email: "jsmith@example.com", role:"user" }
+        if(user){
+          return user
         } else {
-          return Promise.resolve(null)
+          return null
         }
-
-      }
+      },
     }),
-
   ],
+  session: {
+    strategy: "jwt",
+  },
 }
 export default NextAuth(authOptions)
