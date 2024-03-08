@@ -62,7 +62,7 @@ const NavItem = ({ mobile }: INavItemProps) => {
             pathname === "/auth/login" && "border-b-4"
           )}
         >
-          <button onClick={() => signIn()}>signIn</button>
+          <Link href="/auth/login">signIn</Link>
         </li>
       )}
     </ul>
