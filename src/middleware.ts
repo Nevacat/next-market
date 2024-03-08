@@ -12,11 +12,11 @@ export async function middleware(req: NextRequest) {
   if(pathname.startsWith('/admin') && session?.role !== 'admin'){
     return NextResponse.redirect(new URL('/',req.url))
   }
+  if(pathname.startsWith('/auth') && session){
+    return NextResponse.redirect(new URL('/',req.url))
+  }
   return NextResponse.next()
 }
 
-export const config ={
-  matcher : ['/admin']
-}
 
 export default middleware
