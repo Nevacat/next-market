@@ -3,6 +3,9 @@ import Link from "next/link";
 import { cn } from "@/lib/util";
 import { usePathname } from "next/navigation";
 import { signIn, signOut, useSession } from "next-auth/react";
+import { useRecoilValue } from "recoil";
+import { user } from "@/atom/user";
+import getCurrentUser from "@/app/actions/getCurrentUser";
 const LinkData = [
   {
     name: "admin",
@@ -28,9 +31,9 @@ interface INavItemProps {
 }
 
 const NavItem = ({ mobile }: INavItemProps) => {
-  const { data: session } = useSession();
   const pathname = usePathname();
-
+  const currentUser = useRecoilValue(user);
+  console.log(currentUser)
   return (
     <ul
       className={cn(
@@ -51,7 +54,7 @@ const NavItem = ({ mobile }: INavItemProps) => {
           </li>
         );
       })}
-      {session?.user ? (
+      {currentUser ? (
         <li className={cn("py-1 text-center cursor-pointer")}>
           <button onClick={() => signOut()}>signOut</button>
         </li>
