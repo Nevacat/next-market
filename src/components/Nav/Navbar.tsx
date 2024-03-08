@@ -3,14 +3,17 @@ import { cn } from "@/lib/util";
 import React, { useCallback, useState } from "react";
 import NavItem from "./NavItem";
 import Link from "next/link";
+import { useSetRecoilState } from "recoil";
+import { user } from "@/atom/user";
 
-const Navbar = () => {
+const Navbar = ({currentUser}:any) => {
   const [navbarOpen, setNavbarOpen] = useState(false);
 
   const handleMenu = useCallback(() => {
     setNavbarOpen(!navbarOpen);
   },[navbarOpen]);
-
+  const setIsUser = useSetRecoilState(user);
+  setIsUser(currentUser)
   return (
     <nav className={"relative z-10 w-full bg-[#535C91] text-white"}>
       <div className={cn("flex items-center justify-between mx-5 sm:mx-10 lg:mx-20")}>
