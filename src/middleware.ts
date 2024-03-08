@@ -15,6 +15,9 @@ export async function middleware(req: NextRequest) {
   if(pathname.startsWith('/auth') && session){
     return NextResponse.redirect(new URL('/',req.url))
   }
+  if(pathname.startsWith('/user') && !session){
+    return NextResponse.redirect(new URL('/auth/login',req.url))
+  }
   return NextResponse.next()
 }
 
