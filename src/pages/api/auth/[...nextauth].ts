@@ -3,6 +3,7 @@ import { PrismaAdapter } from "@auth/prisma-adapter"
 import CredentialsProvider from "next-auth/providers/credentials";
 import prisma from '@/helper/prismadb'
 import { Adapter } from "next-auth/adapters";
+import bcrypt from 'bcryptjs'
 
 export const authOptions : NextAuthOptions = {
   adapter: PrismaAdapter(prisma) as Adapter,
@@ -14,15 +15,22 @@ export const authOptions : NextAuthOptions = {
         password: { label: "Password", type: "password" }
       },
       async authorize(credentials, req) {
-        // if(!credentials?.email || credentials?.password){
-        //   throw new Error("이메일과 비밀번호를 입력해주세요.")
-        // }
-        const user = { id: "1", name: "J Smith", email: "jsmith@example.com", role:"admin" }
-        if(user){
-          return user
-        } else {
-          return null
+        if(!credentials?.email || !credentials?.password){
+          throw new Error("이메일 또는 비밀번호를 입력해주세요.")
         }
+        const user = await prisma.user.findUnique({
+          where:{
+            email:credentials.email
+          }
+        })
+        if(!user){
+          throw new Error("이메일 또는 비밀번호를 확인해주세요.")
+        }
+        const isValid = await bcrypt.compare(credentials.password, user.password)
+        if(!isValid){
+          throw new Error("이메일 또는 비밀번호를 확인해주세요.")
+        }
+        return user
       },
     }),
   ],
