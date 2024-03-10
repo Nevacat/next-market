@@ -4,7 +4,7 @@ import { FieldErrors, RegisterOptions, UseFormRegister } from 'react-hook-form'
 
 interface InputProps {
   id: string
-  type?: string
+  type: string
   label: string
   disabled?: boolean
   required?: boolean
@@ -27,7 +27,7 @@ const Input = ({
     <div className="relative w-full">
       {
         formatprice && (
-          <span className="">￦</span>
+          <span className="absolute top-[18px] left-3">￦</span>
         )
       }
       <input
