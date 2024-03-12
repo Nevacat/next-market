@@ -4,6 +4,9 @@ import Container from '@/components/Container'
 import Heading from '@/components/Heading'
 import ImageUpload from '@/components/ImageUpload'
 import Input from '@/components/Input'
+import axios from 'axios'
+import dynamic from 'next/dynamic'
+import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 import { FieldValues, useForm } from 'react-hook-form'
 
@@ -18,26 +21,31 @@ const ProductUpload = () => {
       price:1,
       imageSrc:'',
       category:'',
-      latitude:33.55635,
-      longitude:126.82556,
+      latitude:37.5716,
+      longitude:126.9766586,
     }
   })
-
+  const router = useRouter()
   const ImageSrc = watch('imageSrc')
-
+  const Latitude = watch('latitude')
+  const Longitude = watch('longitude')
+  const KakaoMap = dynamic(()=>import('../../../components/Kakaomap'),{ssr:false})
   const setCustomValue = (id:string,value:any) => {
     setValue(id,value)
   }
 
   const onSubmit = (data:FieldValues) => {
-    try {
       setIsLoading(true)
-      console.log(data)
-    } catch (error) {
-      console.error(error)
-    }finally{
-      setIsLoading(false)
-    }
+      axios.post('/api/products',data)
+      .then(
+        res => {
+          router.push(`/products/${res.data.id}`)
+        }
+      ).catch((err)=>{
+        console.error(err)
+      }).finally(()=>{
+        setIsLoading(false);
+      })
   }
 
   return (
@@ -54,6 +62,7 @@ const ProductUpload = () => {
           <Input id='name' type='text' label='상품명' disabled={isLoading} register={register} errors={errors} required={true}/>
           <Input id='description' type='text' label='상품설명' disabled={isLoading} register={register} errors={errors} required={true}/>
           <Input id='price' type='text' label='가격' formatprice disabled={isLoading} register={register} errors={errors} required={true}/>
+          <KakaoMap latitude={Latitude} longitude={Longitude} setCustomValue={setCustomValue} />
           <Button text="업로드" onClick={handleSubmit(onSubmit)}/>
         </form>
       </div>
