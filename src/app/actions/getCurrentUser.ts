@@ -17,6 +17,7 @@ const getCurrentUser = async () => {
         email:session.user.email
       },
       select:{
+        id:true,
         email:true,
         username:true,
         role:true,
@@ -26,9 +27,11 @@ const getCurrentUser = async () => {
         updatedAt:true,
       }
     })
+    console.log(current)
     if(!current){
       return null
     }
+    console.log(current)
     return current
   }catch(err){
     console.log(err)
