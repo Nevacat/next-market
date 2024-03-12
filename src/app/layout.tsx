@@ -6,6 +6,7 @@ import { SessionProvider } from "next-auth/react";
 import getCurrentUser from "./actions/getCurrentUser";
 import { user } from "@/atom/user";
 import RecoilRootWrapper from "@/components/RecoilComponents";
+import Script from "next/script";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,18 +20,20 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
   const currentUser = await getCurrentUser();
 
   return (
     <html lang="en">
       <body className={inter.className}>
         <RecoilRootWrapper>
-        <Navbar currentUser={currentUser} />
+          <Navbar currentUser={currentUser} />
           {children}
         </RecoilRootWrapper>
-
       </body>
+      <Script
+        type="text/javascript"
+        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8132d291ef3233702a372a12e190dffe&libraries=services,clusterer&autoload=false"
+      />
     </html>
   );
 }
