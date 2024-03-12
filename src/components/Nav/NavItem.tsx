@@ -33,7 +33,6 @@ interface INavItemProps {
 const NavItem = ({ mobile }: INavItemProps) => {
   const pathname = usePathname();
   const currentUser = useRecoilValue(user);
-  console.log(currentUser)
   return (
     <ul
       className={cn(
