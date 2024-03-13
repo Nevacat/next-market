@@ -11,6 +11,7 @@ import { fromNow } from "@/helper/formatDate";
 const ProductCard = ({ data }: { data: Product }) => {
   const currentUser = useRecoilValue(user);
   const router = useRouter();
+  const formatPrice = new Intl.NumberFormat("ko-KR").format(data.price);
   return (
     <div
       onClick={() => router.push(`/products/${data.id}`)}
@@ -35,7 +36,7 @@ const ProductCard = ({ data }: { data: Product }) => {
         </div>
         <div className="flex justify-between items-center">
           <p className="text-md md:text-lg font-semibold">
-            {data.price}
+            {formatPrice}
             <span className="text-md font-medium">원</span>
           </p>
           <p className="text-sm">{fromNow(data.createdAt)}</p>
