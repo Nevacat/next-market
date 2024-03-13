@@ -28,7 +28,7 @@ const useFavorite = ({ productId, currentUser }: useFavoriteProps) => {
       await request();
       router.refresh()
     } catch (err: any) {
-      throw new Error(err);
+      err.response.status === 401 && router.push("/auth/login");
     }
   };
   return {
