@@ -1,3 +1,5 @@
+import { PER_PAGE } from "@/constant";
+
 export interface ProductParams{
   latitude?:string
   longtitude?:string
@@ -35,7 +37,7 @@ try{
       createdAt:"desc"
     },
     skip:skip?Number(skip):0,
-    take:12
+    take:PER_PAGE
   })
   return{
     data:products,
