@@ -9,6 +9,7 @@ import { FieldValues, SubmitHandler, useForm } from 'react-hook-form'
 
 const LoginPage = () => {
   const [isLoading,setIsLoading] = useState(false)
+  const router = useRouter()
   const {register,handleSubmit,formState:{
     errors
   }}=useForm<FieldValues>({
@@ -21,7 +22,15 @@ const LoginPage = () => {
   const onSubmit:SubmitHandler<FieldValues> = async (body) => {
     setIsLoading(true)
     try{
-      const res = await signIn('credentials',body)
+      const res = await signIn('credentials',{
+        redirect:false,
+        email:body.email,
+        password:body.password
+      })
+      if(res?.status === 401){
+        throw new Error('로그인 실패')
+      }
+      router.push('/')
     }catch(err){
       console.log(err)
     }finally{
