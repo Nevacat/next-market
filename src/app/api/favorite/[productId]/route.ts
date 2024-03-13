@@ -8,7 +8,7 @@ interface Params {
 export async function POST(req:Request,{params}:{params:Params}) {
   const currentUser = await getCurrentUser()
   if(!currentUser){
-    return NextResponse.error()
+    return NextResponse.json({message:"Unauthorized"},{status:401})
   }
   const {productId} = params
   if(!productId || typeof productId !== "string"){
