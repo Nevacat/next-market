@@ -1,9 +1,18 @@
-import React from 'react'
+import React from "react";
+import ProductClient from "./ProductClient";
+import getProductsById from "@/app/actions/getProductById";
 
-const ProductsDetail = () => {
-  return (
-    <div>ProductsDetail</div>
-  )
+export interface Params {
+  productId?: string;
 }
 
-export default ProductsDetail
+const ProductsDetail = async ({params}:{params:Params}) => {
+  const product = await getProductsById(params);
+  return (
+    <div>
+      <ProductClient product={product!} />
+    </div>
+  );
+};
+
+export default ProductsDetail;
