@@ -23,7 +23,7 @@ const Button = ({
     <button
       disabled={disabled}
       onClick={onClick}
-      className={cn(" relative font-semibold disabled:opacity-70 disabled:cursor-not-allowed rounded-lg hover:opacity-80 border-2 ", dark ?"bg-white border-black text-black" :"bg-[#535C91] border-[#535C91] text-white", sm ? "px-4 py-2 text-sm" : "px-6 py-3 text-lg")}
+      className={cn("relative w-full font-semibold disabled:opacity-70 disabled:cursor-not-allowed rounded-lg hover:opacity-80 border-2 ", dark ?"bg-white border-black text-black" :"bg-[#535C91] border-[#535C91] text-white", sm ? "px-4 py-2 text-sm" : "px-6 py-3 text-lg")}
     >
       {text}
     </button>
