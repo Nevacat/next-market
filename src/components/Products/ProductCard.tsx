@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import React from "react";
 import { useRecoilValue } from "recoil";
 import HeartButton from "../HeartButton";
+import { fromNow } from "@/helper/formatDate";
 
 const ProductCard = ({ data }: { data: Product }) => {
   const currentUser = useRecoilValue(user);
@@ -28,11 +29,17 @@ const ProductCard = ({ data }: { data: Product }) => {
         </div>
       </div>
       <div>
-        <div className="flex flex-col justify-between">
+        <div className="flex flex-col justify-between mb-3">
           <p className="text-md md:text-lg font-semibold">{data.name}</p>
           <p className="text-neutral-500">{data.description}</p>
         </div>
-          <p className="text-md md:text-lg font-semibold">{data.price}<span className="text-md font-medium">원</span></p>
+        <div className="flex justify-between items-center">
+          <p className="text-md md:text-lg font-semibold">
+            {data.price}
+            <span className="text-md font-medium">원</span>
+          </p>
+          <p className="text-sm">{fromNow(data.createdAt)}</p>
+        </div>
       </div>
     </div>
   );
