@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import React from 'react'
 
 export async function middleware(req: NextRequest) {
-  const session = await getToken({req, secret: process.env.JWT_SECRET})
+  const session = await getToken({req, secret: process.env.NEXTAUTH_SECRET})
   const pathname = req.nextUrl.pathname
   if(pathname.startsWith('/admin') && !session){
     return NextResponse.redirect(new URL('/auth/login',req.url))
@@ -14,7 +14,7 @@ export async function middleware(req: NextRequest) {
   if(pathname.startsWith('/auth') && session){
     return NextResponse.redirect(new URL('/',req.url))
   }
-  if((pathname.startsWith('/user')||pathname.startsWith('/products/upload')) && !session){
+  if((pathname.startsWith('/user')||pathname.startsWith('/products/upload')||pathname.startsWith('/chat')) && !session){
     return NextResponse.redirect(new URL('/auth/login',req.url))
   }
   return NextResponse.next()
