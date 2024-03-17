@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Nav/Navbar";
@@ -7,6 +6,8 @@ import getCurrentUser from "./actions/getCurrentUser";
 import { user } from "@/atom/user";
 import RecoilRootWrapper from "@/components/RecoilComponents";
 import Script from "next/script";
+import { useRouter } from "next/navigation";
+import ToastifyProvider from "@/components/ToastifyProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,12 +22,12 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const currentUser = await getCurrentUser();
-
   return (
     <html lang="en">
       <body className={inter.className}>
         <RecoilRootWrapper>
           <Navbar currentUser={currentUser} />
+          <ToastifyProvider/>
           {children}
         </RecoilRootWrapper>
       </body>
