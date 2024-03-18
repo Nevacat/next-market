@@ -3,13 +3,12 @@ import Button from '@/components/Button'
 import Input from '@/components/Input'
 import { signIn } from 'next-auth/react'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form'
+import { toast } from 'react-toastify'
 
 const LoginPage = () => {
   const [isLoading,setIsLoading] = useState(false)
-  const router = useRouter()
   const {register,handleSubmit,formState:{
     errors
   }}=useForm<FieldValues>({
@@ -30,7 +29,10 @@ const LoginPage = () => {
       if(res?.status === 401){
         throw new Error('로그인 실패')
       }
-      router.push('/')
+      toast.success('로그인 성공')
+      setTimeout(() => {
+        window.location.href = '/'
+      }, 1000)
     }catch(err){
       console.log(err)
     }finally{
