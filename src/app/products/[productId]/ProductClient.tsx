@@ -17,7 +17,7 @@ interface ProductClientProps {
 
 const ProductClient = ({ product }: ProductClientProps) => {
   const router = useRouter();
-  const currentUser = useRecoilValue(user);
+  const currentUser = useRecoilValue(user) as User | null;
   const category = categories.find(
     (category) => category.path === product.category
   );

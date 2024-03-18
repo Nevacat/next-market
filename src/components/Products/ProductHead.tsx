@@ -3,12 +3,13 @@ import Heading from '../Heading'
 import { CurrentUser } from '@/app/actions/getCurrentUser'
 import Image from 'next/image'
 import HeartButton from '../HeartButton'
+import { User } from '@prisma/client'
 
 interface ProductHeadProps {
   title: string
   imageSrc: string
   id: string
-  currentUser?: CurrentUser
+  currentUser?: User | null
 }
 
 const ProductHead = ({

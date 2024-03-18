@@ -1,6 +1,6 @@
 "use client";
 import { user } from "@/atom/user";
-import { Product } from "@prisma/client";
+import { Product, User } from "@prisma/client";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React from "react";
@@ -9,7 +9,7 @@ import HeartButton from "../HeartButton";
 import { fromNow } from "@/helper/formatDate";
 
 const ProductCard = ({ data }: { data: Product }) => {
-  const currentUser = useRecoilValue(user);
+  const currentUser = useRecoilValue(user) as User | null;
   const router = useRouter();
   const formatPrice = new Intl.NumberFormat("ko-KR").format(data.price);
   return (

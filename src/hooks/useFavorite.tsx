@@ -6,7 +6,7 @@ import React, { useMemo } from "react";
 
 interface useFavoriteProps {
   productId: string;
-  currentUser?: CurrentUser | null;
+  currentUser?: User | null;
 }
 
 const useFavorite = ({ productId, currentUser }: useFavoriteProps) => {
