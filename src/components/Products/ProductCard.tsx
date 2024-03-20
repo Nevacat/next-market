@@ -30,14 +30,14 @@ const ProductCard = ({ data }: { data: Product }) => {
         </div>
       </div>
       <div>
-        <div className="flex flex-col justify-between mb-3">
-          <p className="text-md md:text-lg font-semibold">{data.name}</p>
-          <p className="text-neutral-500">{data.description}</p>
+        <div className="flex flex-col justify-between mb-2">
+          <p className="text-base md:text-lg font-semibold">{data.name}</p>
+          <p className="text-sm w-[calc(100vw_-_1.5rem_-_1rem)/2] md:w-[230px] h-[40px] text-neutral-500 text-overflow">{data.description}</p>
         </div>
         <div className="flex justify-between items-center">
-          <p className="text-md md:text-lg font-semibold">
+          <p className="text-base md:text-lg font-semibold">
             {formatPrice}
-            <span className="text-md font-medium">원</span>
+            <span className="text-base font-medium">원</span>
           </p>
           <p className="text-sm">{fromNow(data.createdAt)}</p>
         </div>
