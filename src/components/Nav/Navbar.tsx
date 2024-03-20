@@ -5,6 +5,7 @@ import NavItem from "./NavItem";
 import Link from "next/link";
 import { useSetRecoilState } from "recoil";
 import { user } from "@/atom/user";
+import Image from "next/image";
 
 const Navbar = ({currentUser}:any) => {
   const [navbarOpen, setNavbarOpen] = useState(false);
@@ -15,12 +16,14 @@ const Navbar = ({currentUser}:any) => {
   const setIsUser = useSetRecoilState(user);
   setIsUser(currentUser)
   return (
-    <nav className={"relative z-10 w-full bg-[#535C91] text-white"}>
+    <nav className={"relative z-10 w-full text-white"}>
       <div className={cn("flex items-center justify-between mx-5 sm:mx-10 lg:mx-20")}>
-        <div className={"flex items-center text-2xl h-14"}>
-          <Link href="/">로드마켓</Link>
+        <div className={"flex items-center text-2xl h-14 mt-2"}>
+          <Link href="/">
+            <Image src="/logoImage.webp" alt="logo"  width={200} height={200}/>
+          </Link>
         </div>
-        <div className={"text-2xl sm:hidden"}>
+        <div className={"text-3xl sm:hidden text-black"}>
           {!navbarOpen ? <div onClick={handleMenu}>+</div> : <div onClick={handleMenu}>-</div>}
           </div>
         <div className={"hidden sm:block"}>

@@ -11,7 +11,7 @@ const FloatingButton = ({
   children
 }:FloatingButtonProps) => {
   return (
-    <Link href={href} className='fixed bottom-5 right-5 w-14 h-14 bg-[#535c91] flex justify-center items-center rounded-full text-white text-2xl'>
+    <Link href={href} className='fixed bottom-5 right-5 w-14 h-14 bg-black flex justify-center items-center rounded-full text-white text-2xl'>
       {children}
     </Link>
   )

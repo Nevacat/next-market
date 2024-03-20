@@ -21,7 +21,7 @@ const CategoryInput = ({
     <div
       onClick={()=>onClick(path)}
       className={
-        cn("rounded-xl border-2 p-4 flex-col gap-3 hover:border-[#535C91] transition cursor-pointer",selected?"border-[#535C91]":"border-neutral-200")
+        cn("rounded-xl border-2 p-4 flex-col gap-3 hover:border-black transition cursor-pointer",selected?"border-black":"border-neutral-200")
       }
     >
       <Icon size={30}/>

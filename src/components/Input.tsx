@@ -36,7 +36,7 @@ const Input = ({
         disabled={disabled}
         {...register(id, {required:required})}
         placeholder=''
-        className={cn("w-full outline-none border-2 border-[#535C91] rounded-md p-4 peer disabled:opacity-70 disabled:cursor-not-allowed",formatprice ? "pl-9" : "pl-4", errors![id] && "border-red-500", errors![id] ?"focus:border-rose-500" :"focus:border-[#000fff]" )}
+        className={cn("w-full outline-none border-2 border-black rounded-md p-4 peer disabled:opacity-70 disabled:cursor-not-allowed",formatprice ? "pl-9" : "pl-4", errors![id] && "border-red-500", errors![id] ?"focus:border-rose-500" :"focus:border-[#000fff]" )}
       />
       <label
         htmlFor={id}
