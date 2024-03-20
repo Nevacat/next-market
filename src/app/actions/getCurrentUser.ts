@@ -29,16 +29,6 @@ const getCurrentUser = async () => {
       where:{
         email:session.user.email
       },
-      select:{
-        id:true,
-        email:true,
-        username:true,
-        role:true,
-        favorites:true,
-        products:true,
-        createdAt:true,
-        updatedAt:true,
-      }
     })
     if(!current){
       return null
