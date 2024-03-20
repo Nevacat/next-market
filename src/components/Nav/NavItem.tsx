@@ -6,6 +6,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import { useRecoilValue } from "recoil";
 import { user } from "@/atom/user";
 import getCurrentUser from "@/app/actions/getCurrentUser";
+import { User } from "@prisma/client";
 const LinkData = [
   {
     name: "admin",
@@ -32,11 +33,11 @@ interface INavItemProps {
 
 const NavItem = ({ mobile }: INavItemProps) => {
   const pathname = usePathname();
-  const currentUser = useRecoilValue(user);
+  const currentUser = useRecoilValue(user) as User | null;
   return (
     <ul
       className={cn(
-        "text-md flex justify-center gap-4 w-full items-center",
+        "text-md flex justify-center gap-4 w-full items-center text-black",
         mobile && "flex-col h-full pb-10"
       )}
     >
@@ -49,7 +50,9 @@ const NavItem = ({ mobile }: INavItemProps) => {
               pathname === data.path && "border-b-4"
             )}
           >
-            <Link href={data.path}>{data.name}</Link>
+            <Link href={data.path}>{
+              data.name === "user" && currentUser ? `${currentUser.username}님` : data.name
+            }</Link>
           </li>
         );
       })}
