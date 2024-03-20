@@ -30,7 +30,7 @@ const PaginationLink = ({ page, disabled, active, children }: PaginationLinkProp
   return (
     <Link 
       href={{ query: updatedQuery }} 
-      className={`p-2 text-2xl 
+      className={`p-2 text-xl 
       ${active ? "font-bold text-black" :""}
       ${disabled ? "pointer-events-none text-gray-200" : ""}
       `}
