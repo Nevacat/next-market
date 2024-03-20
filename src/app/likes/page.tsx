@@ -14,15 +14,15 @@ const LikesPage = async ({ searchParams }: LikesPageProps) => {
   const page = searchParams?.page;
   const currentUser = await getCurrentUser();
   const products = await getProducts(searchParams);
-  const likeProducts = products.data.filter((product: any) => {
+  const likeProducts = products?.data.filter((product: any) => {
     return currentUser?.favorites.includes(product.id);
   });
   const total = currentUser!.favorites.length;
   return (
     <Container>
-      {likeProducts.length > 0 ? (
+      {products&&likeProducts!.length > 0 ? (
         <div className="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-6 mt-4 md:mt-6 gap-2 md:gap-8">
-          {likeProducts.map((product: any) => (
+          {likeProducts!.map((product: any) => (
             <ProductCard key={product.id} data={product} />
           ))}
         </div>
