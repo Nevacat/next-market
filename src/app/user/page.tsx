@@ -1,8 +1,12 @@
 import React from 'react'
+import UserClient from './UserClient'
 
 const page = () => {
+  
   return (
-    <div>page</div>
+    <div>
+      <UserClient/>
+    </div>
   )
 }
 
