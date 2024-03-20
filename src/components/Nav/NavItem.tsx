@@ -9,15 +9,15 @@ import getCurrentUser from "@/app/actions/getCurrentUser";
 import { User } from "@prisma/client";
 const LinkData = [
   {
-    name: "admin",
+    name: "ADMIN",
     path: "/admin",
   },
   {
-    name: "user",
+    name: "USER",
     path: "/user",
   },
   {
-    name: "chat",
+    name: "CHAT",
     path: "/chat",
   },
 ];
@@ -29,16 +29,17 @@ interface ILinkDataType {
 
 interface INavItemProps {
   mobile?: boolean;
+  setNavbar?:(value:boolean)=>void;
 }
 
-const NavItem = ({ mobile }: INavItemProps) => {
+const NavItem = ({ mobile,setNavbar }: INavItemProps) => {
   const pathname = usePathname();
   const currentUser = useRecoilValue(user) as User | null;
   return (
     <ul
       className={cn(
         "text-md flex justify-center gap-4 w-full items-center text-black",
-        mobile && "flex-col h-full pb-10"
+        mobile && "flex-col h-full py-4"
       )}
     >
       {LinkData.map((data: ILinkDataType, index: number) => {
@@ -49,16 +50,17 @@ const NavItem = ({ mobile }: INavItemProps) => {
               "py-1 text-center cursor-pointer",
               pathname === data.path && "border-b-4"
             )}
+            onClick={()=>setNavbar&&setNavbar(false)}
           >
             <Link href={data.path}>{
-              data.name === "user" && currentUser ? `${currentUser.username}님` : data.name
+              data.name === "USER" && currentUser ? `${currentUser.username}님` : data.name
             }</Link>
           </li>
         );
       })}
       {currentUser ? (
-        <li className={cn("py-1 text-center cursor-pointer")}>
-          <button onClick={() => signOut()}>signOut</button>
+        <li className={cn("py-1 text-center cursor-pointer")} onClick={()=>setNavbar&&setNavbar(false)}>
+          <button onClick={() => signOut()}>SIGNOUT</button>
         </li>
       ) : (
         <li
@@ -67,7 +69,7 @@ const NavItem = ({ mobile }: INavItemProps) => {
             pathname === "/auth/login" && "border-b-4"
           )}
         >
-          <Link href="/auth/login">signIn</Link>
+          <Link href="/auth/login" onClick={()=>setNavbar&&setNavbar(false)}>SIGNIN</Link>
         </li>
       )}
     </ul>

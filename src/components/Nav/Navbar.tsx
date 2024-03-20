@@ -19,7 +19,7 @@ const Navbar = ({currentUser}:any) => {
     <nav className={"relative z-10 w-full text-white"}>
       <div className={cn("flex items-center justify-between mx-5 sm:mx-10 lg:mx-20")}>
         <div className={"flex items-center text-2xl h-14 mt-2"}>
-          <Link href="/">
+          <Link href="/" onClick={()=>navbarOpen&&setNavbarOpen(false)}>
             <Image src="/logoImage.webp" alt="logo"  width={200} height={200}/>
           </Link>
         </div>
@@ -31,7 +31,7 @@ const Navbar = ({currentUser}:any) => {
         </div>
       </div>
       <div className="block sm:hidden">
-        {navbarOpen && <NavItem mobile={true}/> }
+        {navbarOpen && <NavItem mobile={true} setNavbar={setNavbarOpen}/> }
       </div>
     </nav>
   );
