@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form'
+import { toast } from 'react-toastify'
 
 const Signup = () => {
   const [loading,setIsLoading] = useState(false)
@@ -17,7 +18,11 @@ const Signup = () => {
   const onSubmit:SubmitHandler<FieldValues> = async (body) => {
     setIsLoading(true)
     try {
-      const data = await axios.post('/api/register',body)
+      const res = await axios.post('/api/register',body)
+      if(res.data.status === 400){
+        toast.error('이미 존재하는 이메일입니다.')
+        throw new Error('이미 존재하는 이메일입니다.')
+      }
       router.push('/auth/login')
     }catch(err){
       console.log(err)
