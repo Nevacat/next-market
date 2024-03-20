@@ -50,14 +50,18 @@ const ProductClient = ({ product }: ProductClientProps) => {
             />
           </div>
         </div>
-        <div className="mt-10">
-          <Button
-            onClick={() => {
-              router.push("/chat");
-            }}
-            text="판매자와 채팅하기"
-          />
-        </div>
+        {
+          product.user.id !== currentUser?.id && (
+            <div className="mt-10">
+              <Button
+                onClick={() => {
+                  router.push(`/chat?id=${product.user.id}`);
+                }}
+                text="판매자와 채팅하기"
+              />
+            </div>
+          )
+        }
       </div>
     </Container>
   );
