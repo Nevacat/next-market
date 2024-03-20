@@ -27,15 +27,17 @@ export default async function Main({ searchParams }: MainProps) {
       {products?.data.length === 0 ? (
         <EmptyState />
       ) : (
-        <div className="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-6 mt-4 md:mt-6 gap-2 md:gap-8">
-          {products?.data.map((product: Product) => (
-            <ProductCard key={product.id} data={product} />
-          ))}
-        </div>
+        <>
+          <div className="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-6 mt-4 md:mt-6 gap-2 md:gap-8">
+            {products?.data.map((product: Product) => (
+              <ProductCard key={product.id} data={product} />
+            ))}
+          </div>
+          <div className="w-full my-10 flex justify-center items-center">
+            <Pagination totalItems={total!} page={page} />
+          </div>
+        </>
       )}
-      <div className="w-full my-10 flex justify-center items-center">
-        <Pagination totalItems={total} page={page} />
-      </div>
       <FloatingButton href="/products/upload">+</FloatingButton>
     </Container>
   );
