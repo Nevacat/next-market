@@ -1,3 +1,4 @@
+import { signOut } from "next-auth/react";
 import Link from "next/link";
 import React from "react";
 import { AiOutlineHeart } from "react-icons/ai";
@@ -32,7 +33,7 @@ const MenuList = () => {
         ))}
       </div>
       <div className="bg-black h-[calc(100%_-_44px)] flex justify-center rounded-md items-center text-white text-2xl ">준비중</div>
-      <button className="bg-black w-full text-white text-2xl rounded-md p-2 cursor-pointer transition hover:opacity-70">로그아웃</button>
+      <button className="bg-black w-full text-white text-2xl rounded-md p-2 cursor-pointer transition hover:opacity-70" onClick={()=>signOut()}>로그아웃</button>
     </div>
   );
 };
