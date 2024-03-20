@@ -1,6 +1,8 @@
 'use client'
 import Chat from '@/components/Chat/Chat'
 import Contact from '@/components/Chat/Contacts'
+import Error from '@/components/Error'
+import Loader from '@/components/Loader'
 import { cn } from '@/lib/util'
 import { TUserWithChat } from '@/types/chat'
 import { User } from '@prisma/client'
@@ -41,8 +43,8 @@ const ChatClient = ({
     }
   }
   ,[id,users])
-  if(isLoading) return <div>loading...</div>
-  if(error) return <div>error</div>
+  if(isLoading) return <Loader/>
+  if(error) return <Error/>
   return (
     <main>
       <div className='grid grid-cols-[1fr] md:grid-cols-[300px_1fr]'>
