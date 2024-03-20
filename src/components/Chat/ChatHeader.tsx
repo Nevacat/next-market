@@ -17,7 +17,7 @@ const ChatHeader = ({
   lastMessageTime,
 }: ChatHeaderProps) => {
   return (
-    <div className="flex items-center h-16 gap-4 pl-4 border-b-[1px]">
+    <div className="flex items-center h-16 gap-4 pl-4 border-y-[1px]">
       <div className="flex items-center justify-center text-3xl text-gray-400 hover:text-gray-600">
         <button onClick={() => setLayout(true)} className="md:hidden">
           <IoChevronBackCircleSharp />
