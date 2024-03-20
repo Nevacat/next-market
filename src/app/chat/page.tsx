@@ -1,5 +1,5 @@
 import React from 'react'
-import ChatClient from './[userId]/ChatClient'
+import ChatClient from './ChatClient'
 import getCurrentUser from '../actions/getCurrentUser'
 
 interface Params {
