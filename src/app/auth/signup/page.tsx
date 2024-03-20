@@ -23,6 +23,7 @@ const Signup = () => {
         toast.error('이미 존재하는 이메일입니다.')
         throw new Error('이미 존재하는 이메일입니다.')
       }
+      toast.success('회원가입이 완료되었습니다.')
       router.push('/auth/login')
     }catch(err){
       console.log(err)

@@ -16,6 +16,6 @@ export default async function getProductsById(params: Params) {
     }
     return product
   }catch(err:any){
-    throw new Error(err)
+    return null
   }
 }

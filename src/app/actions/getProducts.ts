@@ -44,7 +44,7 @@ try{
     totalItems:totalItems
   }
   }catch(err:any){
-    throw new Error(err)
+    return null
   }
 }
 
