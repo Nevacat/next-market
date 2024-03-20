@@ -74,7 +74,7 @@ const Input = ({
           </div>
         )
       }
-      <input type='text' disabled={isMutating} className='w-full h-full text-base ouline-none' placeholder='메세지를 입력하세요.' onChange={(e)=>setMessage(e.target.value)} value={message} />
+      <input type='text' disabled={isMutating} className='w-full h-full text-base outline-none px-2' placeholder='메세지를 입력하세요.' onChange={(e)=>setMessage(e.target.value)} value={message} />
       <input type="file" className='hidden' disabled={isMutating} ref={imageRef} multiple={false} onChange={(e)=>previewImage(e,setImagePreview,setImage)} accept='image/*'/>
       <div className='flex items-center justify-center p-2 text-white bg-black rounded-lg cursor-pointer hover:opacity-70 disabled:opacity-50' onClick={chooseImage}>
         <IoImageOutline/>
