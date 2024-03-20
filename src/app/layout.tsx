@@ -9,12 +9,18 @@ import Script from "next/script";
 import { useRouter } from "next/navigation";
 import ToastifyProvider from "@/components/ToastifyProvider";
 import { Noto_Sans_KR } from 'next/font/google';
+import { Metadata } from "next";
 
 /**적용하고자 하는 font*/
 const notoSansKr = Noto_Sans_KR({
   weight: ['500'],
   subsets: ['latin'],
 });
+
+export const metadata:Metadata = {
+  title: 'Next.js + Prisma + NextAuth.js + Recoil + Tailwind CSS',
+  description: 'Next.js + Prisma + NextAuth.js + Recoil + Tailwind CSS',
+}
 
 
 export default async function RootLayout({
