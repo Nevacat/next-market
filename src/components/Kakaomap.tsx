@@ -25,7 +25,7 @@ const Kakaomap = ({
     <Map
       center={{lat:latitude, lng:longitude}}
       style={{width: '100%', height: '360px'}}
-      onClick={(_,mouse) => {handleClick(mouse), console.log(mouse.latLng.getLat(),mouse.latLng.getLng())}}
+      onClick={(_,mouse) => {handleClick(mouse)}}
       >
       <MapMarker
         position={{lat:latitude, lng:longitude}}
