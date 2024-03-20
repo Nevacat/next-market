@@ -27,6 +27,7 @@ const LoginPage = () => {
         password:body.password
       })
       if(res?.status === 401){
+        toast.error('로그인 실패')
         throw new Error('로그인 실패')
       }
       toast.success('로그인 성공')
