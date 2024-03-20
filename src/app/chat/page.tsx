@@ -1,9 +1,18 @@
 import React from 'react'
+import ChatClient from './[userId]/ChatClient'
+import getCurrentUser from '../actions/getCurrentUser'
 
-const page = () => {
+interface Params {
+  userId?: string
+}
+
+const ChatPage = async ({params}:{params:Params}) => {
+  const currentUser = await getCurrentUser()
   return (
-    <div>page</div>
+    <div>
+      <ChatClient currentUser={currentUser}/>
+    </div>
   )
 }
 
-export default page
+export default ChatPage
