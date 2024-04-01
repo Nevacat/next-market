@@ -93,6 +93,9 @@ POST api/register
 ![Animation4](https://github.com/Nevacat/next-market/assets/110139098/c38c2ff4-f8ee-45fe-8807-6a125850fbc5) | ![Animation9](https://github.com/Nevacat/next-market/assets/110139098/75771ba0-1249-4861-b06f-5af36ffb5cf6)
 ---|---|
 
+![Untitled-2024-03-01-1515](https://github.com/Nevacat/next-market/assets/110139098/1117a848-37f5-4179-9604-e145876d6462)
+
+
 
 ---
 
@@ -100,6 +103,14 @@ POST api/register
 
 ![Animation2](https://github.com/Nevacat/next-market/assets/110139098/854c4007-6c79-4e53-ba35-fd09fbb41a22) | ![Animation7](https://github.com/Nevacat/next-market/assets/110139098/f5cc611d-b965-46a5-aa49-1a480b2bd819)
 ---|---|
+
+1. 제품등록을 위해 이미지를 업로드합니다.
+2. 이미지를 업로드하면 Cloudinary에 저장되며, Url을 응답해줍니다.
+3. 내용에 맞게 Input에 내용을 작성합니다.
+4. 카카오 이미지에 내가 원하는 장소를 클릭하여 위도와 경도를 추출합니다.
+5. api/products에 POST형식으로 데이터를 전송합니다.
+6. DB에 정상적으로 저장되면, 해당 데이터를 다시 응답합니다.
+7. 서버에서 내가 작성한 데이터를 상품 상세페이지와 결합하여 응답하고 화면에 렌더링합니다.
 
 ---
 
@@ -116,7 +127,9 @@ POST api/register
 ![Animation6](https://github.com/Nevacat/next-market/assets/110139098/b1a7b91c-093d-458b-8358-d95cdcfec18f)
 
 ```
-  
+  const {data:users,error,isLoading} = useSWR('/api/chat',fetcher,{
+  refreshinterval : 1000
+})
 ```
 
 1. SWR의 refreshInterval을 통해 **1초마다 서버 데이터 갱신**
