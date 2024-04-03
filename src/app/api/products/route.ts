@@ -2,10 +2,10 @@ import { NextResponse } from "next/server";
 import prisma from "@/helper/prismadb";
 import getCurrentUser from "@/app/actions/getCurrentUser";
 
-export async function POST(request:Request) {
+export async function POST(request: Request) {
   const current = await getCurrentUser();
   if (!current) {
-    return NextResponse.json({ message: "Unauthorized" }, { status: 401 })
+    return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
   }
   const body = await request.json();
   const { name, price, imageSrc, description, latitude, longitude, category } =
@@ -28,4 +28,14 @@ export async function POST(request:Request) {
     },
   });
   return NextResponse.json(product);
+}
+
+export async function GET() {
+  const products = await prisma.product.findMany({
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+  if(!products) return NextResponse.error();
+  return NextResponse.json(products);
 }
