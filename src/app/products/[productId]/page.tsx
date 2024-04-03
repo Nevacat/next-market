@@ -9,21 +9,21 @@ export interface Params {
   productId?: string;
 }
 
-export async function  generateStaticParams() {
-  const res = await getProducts();
-  if(!res){
-    return [{productId:""}]
-  }
+// export async function  generateStaticParams() {
+//   const res = await getProducts();
+//   if(!res){
+//     return [{productId:""}]
+//   }
   
-  return res.data.map((products:Product)=>({
-    productId:products.id.toString()
-  }
-  ));
-}
+//   return res.data.map((products:Product)=>({
+//     productId:products.id.toString()
+//   }
+//   ));
+// }
 
 const ProductsDetail = async ({ params }: { params: Params }) => {
   const { productId } = params;
-  const data = await fetch(`${process.env.NEXT_PAGE_URL}/api/products/${productId}`,{cache:"no-store"}).then(res=>res.json());
+  const data = await fetch(`${process.env.NEXT_PAGE_URL}/api/products/${productId}`,{cache:"force-cache"}).then(res=>res.json());
   console.log(data)
   // const [data, setData] = useState(null);
   
