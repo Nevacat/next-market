@@ -18,18 +18,22 @@ interface MainProps {
 
 export default async function Main({ searchParams }: MainProps) {
   const page = searchParams?.page;
-
-  const products = await getProducts(searchParams);
+  const products = await fetch(`${process.env.NEXT_PAGE_URL}/api/products`,{cache:"no-store"}).then(res=>res.json());
   const total = products?.totalItems;
+
+    
   return (
     <Container>
       <Categories />
-      {products?.data.length === 0 ? (
+      {
+        !products && <EmptyState />
+      }
+      {products?.length === 0 ? (
         <EmptyState />
       ) : (
         <>
           <div className="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-6 mt-4 md:mt-6 gap-2 md:gap-8">
-            {products?.data.map((product: Product) => (
+            {products?.map((product: Product) => (
               <ProductCard key={product.id} data={product} />
             ))}
           </div>

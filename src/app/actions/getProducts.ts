@@ -8,8 +8,8 @@ export interface ProductParams{
   skip?:number
 }
 
-async function getProducts(params:ProductParams) {
-  const {latitude,longtitude, category, page, skip}= params
+async function getProducts(params?:ProductParams) {
+  const {latitude,longtitude, category, page, skip}= params || {}
   let query:any={}
   if(category){
     query.category = category
