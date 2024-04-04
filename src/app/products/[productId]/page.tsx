@@ -1,3 +1,4 @@
+'use client'
 import React, { useEffect, useState } from "react";
 import ProductClient from "./ProductClient";
 import getProductsById from "@/app/actions/getProductById";
@@ -9,33 +10,32 @@ export interface Params {
   productId?: string;
 }
 
-export async function  generateStaticParams() {
-  const res = await getProducts();
-  if(!res){
-    return [{productId:""}]
-  }
+// export async function  generateStaticParams() {
+//   const res = await getProducts();
+//   if(!res){
+//     return [{productId:""}]
+//   }
   
-  return res.data.map((products:Product)=>({
-    productId:products.id.toString()
-  }
-  ));
-}
+//   return res.data.map((products:Product)=>({
+//     productId:products.id.toString()
+//   }
+//   ));
+// }
 
-const ProductsDetail = async ({ params }: { params: Params }) => {
+const ProductsDetail = ({ params }: { params: Params }) => {
   const { productId } = params;
-  const data = await fetch(`${process.env.NEXT_PAGE_URL}/api/products/${productId}`,{cache:"no-store"}).then(res=>res.json());
-  console.log(data)
-  // const [data, setData] = useState(null);
+  // const data = await fetch(`${process.env.NEXT_PAGE_URL}/api/products/${productId}`,{cache:"no-store"}).then(res=>res.json());
+  // console.log(data)
+  const [data, setData] = useState(null);
   
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     console.log('client')
-  //     const res = await fetch(`/api/products/${params.productId}`);
-  //     const product = await res.json();
-  //     setData(product);
-  //   }
-  //   fetchData();
-  // }, [params.productId]);
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await fetch(`/api/products/${params.productId}`);
+      const product = await res.json();
+      setData(product);
+    }
+    fetchData();
+  }, [params.productId]);
   return <div>{data !== null && <ProductClient product={data!} />}</div>;
 };
 

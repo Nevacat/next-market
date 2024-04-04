@@ -1,5 +1,6 @@
+'use client'
 import Container from "@/components/Container";
-import React from "react";
+import React, { use, useEffect, useState } from "react";
 import getCurrentUser from "../actions/getCurrentUser";
 import { user } from "@/atom/user";
 import { useSetRecoilState } from "recoil";
@@ -16,12 +17,19 @@ interface MainProps {
   searchParams: ProductParams;
 }
 
-export default async function Main({ searchParams }: MainProps) {
+export default function Main({ searchParams }: MainProps) {
   const page = searchParams?.page;
-  const products = await fetch(`${process.env.NEXT_PAGE_URL}/api/products`,{cache:"force-cache"}).then(res=>res.json());
-  const total = products?.totalItems;
-
-    
+  // const products = await fetch(`${process.env.NEXT_PAGE_URL}/api/products`,{cache:"force-cache"}).then(res=>res.json());
+  const [products,setProducts] = useState([]);
+  // const total = products?.totalItems;
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await fetch(`/api/products`).then(res=>res.json());
+      console.log(res)
+      setProducts(res);
+    };
+    fetchData();
+  }, [searchParams]);
   return (
     <Container>
       <Categories />
@@ -38,7 +46,7 @@ export default async function Main({ searchParams }: MainProps) {
             ))}
           </div>
           <div className="w-full my-10 flex justify-center items-center">
-            <Pagination totalItems={total!} page={page} />
+            <Pagination totalItems={10} page={page} />
           </div>
         </>
       )}
