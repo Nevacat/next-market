@@ -18,7 +18,7 @@ interface MainProps {
 
 export default async function Main({ searchParams }: MainProps) {
   const page = searchParams?.page;
-  const products = await fetch(`${process.env.NEXT_PAGE_URL}/api/products`,{cache:"no-store"}).then(res=>res.json());
+  const products = await fetch(`${process.env.NEXT_PAGE_URL}/api/products`,{cache:"force-cache"}).then(res=>res.json());
   const total = products?.totalItems;
 
     
