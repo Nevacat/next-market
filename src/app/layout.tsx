@@ -2,7 +2,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Nav/Navbar";
 import { SessionProvider } from "next-auth/react";
-import getCurrentUser from "./actions/getCurrentUser";
+import getCurrentUser, { CurrentUser } from "./actions/getCurrentUser";
 import { user } from "@/atom/user";
 import RecoilRootWrapper from "@/components/RecoilComponents";
 import Script from "next/script";
@@ -33,7 +33,7 @@ export default async function RootLayout({
     <html lang="en">
       <body className={`${notoSansKr.className}`}>
         <RecoilRootWrapper>
-          <Navbar currentUser={currentUser} />
+          <Navbar currentUser={currentUser as CurrentUser | null} />
           <ToastifyProvider/>
           {children}
         </RecoilRootWrapper>
