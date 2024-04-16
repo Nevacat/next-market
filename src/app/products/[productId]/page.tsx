@@ -23,7 +23,6 @@ export async function  generateStaticParams() {
 
 const ProductsDetail = async ({ params }: { params: Params }) => {
   const data = await getProductsById(params);
-  console.log(data)
   // console.log(data)
   // const [data, setData] = useState(null);
   

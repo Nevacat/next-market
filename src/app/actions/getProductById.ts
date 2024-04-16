@@ -11,7 +11,6 @@ export default async function getProductsById(params: Params) {
         user:true
       }
     })
-    console.log(productId)
     if(!product){
       return null
     }
