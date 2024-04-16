@@ -9,14 +9,14 @@ interface ProductHeadProps {
   title: string
   imageSrc: string
   id: string
-  currentUser?: User | null
+  likes?: string[]
 }
 
 const ProductHead = ({
   title,
   imageSrc,
   id,
-  currentUser
+  likes
 }:ProductHeadProps) => {
   return (
     <>
@@ -24,7 +24,7 @@ const ProductHead = ({
       <div className='relative w-full h-[40vh] md:h-[60vh] overflow-hidden rounded-xl'>
         <Image src={imageSrc} alt="상품" fill className="object-cover w-full"/>
         <div className='absolute top-5 right-5'>
-          <HeartButton productId={id} currentUser={currentUser}/>
+          <HeartButton productId={id}/>
         </div>
       </div>
     </>
