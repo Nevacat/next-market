@@ -1,5 +1,5 @@
 "use client";
-import { user } from "@/atom/user";
+import { like, user } from "@/atom/user";
 import { Product, User } from "@prisma/client";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -9,7 +9,7 @@ import HeartButton from "../HeartButton";
 import { fromNow } from "@/helper/formatDate";
 
 const ProductCard = ({ data }: { data: Product }) => {
-  const currentUser = useRecoilValue(user) as User | null;
+
   const router = useRouter();
   const formatPrice = new Intl.NumberFormat("ko-KR").format(data.price);
   return (
@@ -26,7 +26,7 @@ const ProductCard = ({ data }: { data: Product }) => {
           className="object-cover w-full h-full transition group-hover:scale-110"
         />
         <div className="absolute top-3 right-3">
-          <HeartButton currentUser={currentUser} productId={data.id} />
+          <HeartButton productId={data.id}/>
         </div>
       </div>
       <div>
