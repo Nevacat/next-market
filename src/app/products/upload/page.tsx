@@ -87,7 +87,7 @@ const ProductUpload = () => {
             }
           </div>
           <KakaoMap latitude={Latitude} longitude={Longitude} setCustomValue={setCustomValue} />
-          <Button text="업로드" onClick={handleSubmit(onSubmit)}/>
+          <Button disabled={isLoading} text="업로드" onClick={handleSubmit(onSubmit)}/>
         </form>
       </div>
     </Container>
