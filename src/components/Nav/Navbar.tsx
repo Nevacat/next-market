@@ -4,17 +4,25 @@ import React, { useCallback, useState } from "react";
 import NavItem from "./NavItem";
 import Link from "next/link";
 import { useSetRecoilState } from "recoil";
-import { user } from "@/atom/user";
+import { like, user } from "@/atom/user";
 import Image from "next/image";
+import { User } from "@prisma/client";
+import { CurrentUser } from "@/app/actions/getCurrentUser";
 
-const Navbar = ({currentUser}:any) => {
+interface NavbarProps {
+  currentUser: CurrentUser | null;  
+}
+
+const Navbar = ({currentUser}:NavbarProps) => {
   const [navbarOpen, setNavbarOpen] = useState(false);
 
   const handleMenu = useCallback(() => {
     setNavbarOpen(!navbarOpen);
   },[navbarOpen]);
   const setIsUser = useSetRecoilState(user);
+  const setIsLikes = useSetRecoilState(like);
   setIsUser(currentUser)
+  setIsLikes(currentUser?.favorites||[])
   return (
     <nav className={"relative z-10 w-full text-white"}>
       <div className={cn("flex items-center justify-between mx-5 sm:mx-10 lg:mx-20")}>

@@ -1,18 +1,18 @@
+import { like, user } from '@/atom/user';
 import useFavorite from '@/hooks/useFavorite'
 import { cn } from '@/lib/util'
 import { User } from '@prisma/client';
 import React from 'react'
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai'
+import { useRecoilValue } from 'recoil';
 
 interface HeartButtonProps{
   productId:string;
-  currentUser?:User|null
 }
 
-const HeartButton = ({productId,currentUser}:HeartButtonProps) => {
-
+const HeartButton = ({productId}:HeartButtonProps) => {
   const {hasFavorite,toggleFavorite} = useFavorite({
-    productId,currentUser
+    productId
   })
 
   return (

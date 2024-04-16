@@ -32,7 +32,6 @@ const ProductClient = ({ product }: ProductClientProps) => {
             title={product.name}
             imageSrc={product.imageSrc}
             id={product.id}
-            currentUser={currentUser}
           />
         </div>
         <div className="grid gird-cols-1 mt-6 md:grid-cols-2 md:gap-10">

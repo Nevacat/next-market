@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import ProductClient from "./ProductClient";
-import getProductsById from "@/app/actions/getProductById";
 import axios from "axios";
 import { Product } from "@prisma/client";
 import getProducts from "@/app/actions/getProducts";
+import getProductsById from "@/app/actions/getProductById";
 
 export interface Params {
   productId?: string;
@@ -22,8 +22,8 @@ export async function  generateStaticParams() {
 }
 
 const ProductsDetail = async ({ params }: { params: Params }) => {
-  const { productId } = params;
-  const data = await fetch(`${process.env.NEXT_PAGE_URL}/api/products/${productId}`,{cache:"force-cache"}).then(res=>res.json());
+  const data = await getProductsById(params);
+  console.log(data)
   // console.log(data)
   // const [data, setData] = useState(null);
   
