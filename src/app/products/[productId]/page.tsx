@@ -22,8 +22,7 @@ export async function  generateStaticParams() {
 }
 
 const ProductsDetail = async ({ params }: { params: Params }) => {
-  const data = await getProductsById(params);
-  console.log(data)
+  const data = await fetch(`${process.env.NEXT_PAGE_URL}/api/products/${params.productId}`).then(res=>res.json());
   // console.log(data)
   // const [data, setData] = useState(null);
   

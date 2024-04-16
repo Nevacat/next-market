@@ -18,7 +18,7 @@ interface MainProps {
 
 export default async function Main({ searchParams }: MainProps) {
   const page = searchParams?.page;
-  const products = await getProducts(searchParams);
+  const products = await fetch(`${process.env.NEXT_PAGE_URL}/api/products`).then(res=>res.json());
   // const [products,setProducts] = useState([]);
   const total = products?.totalItems;
   // useEffect(() => {
@@ -34,12 +34,12 @@ export default async function Main({ searchParams }: MainProps) {
       {
         !products && <EmptyState />
       }
-      {products?.data.length === 0 ? (
+      {products?.length === 0 ? (
         <EmptyState />
       ) : (
         <>
           <div className="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-6 mt-4 md:mt-6 gap-2 md:gap-8">
-            {products?.data.map((product: Product) => (
+            {products?.map((product: Product) => (
               <ProductCard key={product.id} data={product} />
             ))}
           </div>
