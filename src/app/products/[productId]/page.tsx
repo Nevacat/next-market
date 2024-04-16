@@ -23,7 +23,10 @@ export async function  generateStaticParams() {
 
 const ProductsDetail = async ({ params }: { params: Params }) => {
   const { productId } = params;
-  const data = await fetch(`${process.env.NEXT_PAGE_URL}/api/products/${productId}`,{cache:"force-cache"}).then(res=>res.json());
+  const data = await fetch(`${process.env.NEXT_PAGE_URL}/api/products/${productId}`,{
+    next:{revalidate:60},
+  }).then(res=>res.json());
+  console.log(data)
   // console.log(data)
   // const [data, setData] = useState(null);
   
