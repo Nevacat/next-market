@@ -1,3 +1,4 @@
+'use client'
 import Container from "@/components/Container";
 import React, { use, useEffect, useState } from "react";
 import getCurrentUser from "../actions/getCurrentUser";
@@ -16,7 +17,7 @@ interface MainProps {
   searchParams: ProductParams;
 }
 
-export default async function Main({ searchParams }: MainProps) {
+export default function Main({ searchParams }: MainProps) {
   const page = searchParams?.page;
   // const products = await getProducts(searchParams);/
   const [products,setProducts] = useState([]);
